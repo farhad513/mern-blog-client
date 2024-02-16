@@ -12,7 +12,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import AdminRoute from "./routes/AdminRoute";
 import DashboardProfile from "./components/DashboardProfile";
 import CreatePost from "./pages/CreatePost";
-import UpdatePost from "./pages/updatePost";
+import UpdatePost from "./pages/UpdatePost";
 import PostPage from "./pages/PostPage";
 import ScrollToTop from "./pages/ScrollToTop";
 function App() {
