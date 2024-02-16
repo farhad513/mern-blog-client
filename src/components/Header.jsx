@@ -32,7 +32,7 @@ const Header = () => {
             className="collapse navbar-collapse "
             id="navbarSupportedContent"
           >
-            <form className="d-flex mx-auto  " role="search">
+            {/* <form className="d-flex mx-auto  " role="search">
               <input
                 className="form-control me-2"
                 type="search"
@@ -42,7 +42,7 @@ const Header = () => {
               <button className="btn btn-outline-success" type="submit">
                 Search
               </button>
-            </form>
+            </form> */}
             <ul className="navbar-nav mx-auto mb-2 mb-lg-0 text-center ">
               <li className="nav-item">
                 <NavLink className="nav-link active" aria-current="page" to="/">

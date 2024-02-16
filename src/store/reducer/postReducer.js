@@ -89,6 +89,24 @@ export const getSinglePost = createAsyncThunk(
   }
 );
 
+export const getPosts = createAsyncThunk(
+  "auth/getPosts",
+  async (_, { rejectWithValue, fulfillWithValue, getState }) => {
+    const { token } = getState().auth;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const { data } = await api.get(`/post/getposts`, config);
+      return fulfillWithValue(data);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const update_post = createAsyncThunk(
   "auth/update_post",
   async (
@@ -178,7 +196,7 @@ const postReducer = createSlice({
       })
       .addCase(getPost.rejected, (state, { payload }) => {
         state.loading = false;
-        state.errorMessage = payload.error;
+        state.errorMessage = payload;
       })
       .addCase(getPost.fulfilled, (state, { payload }) => {
         state.loading = false;
@@ -248,6 +266,19 @@ const postReducer = createSlice({
         state.loading = false;
         state.successMessage = payload.message;
         state.posts = payload.post;
+      })
+      .addCase(getPosts.pending, (state) => {
+        state.loading = true;
+        state.errorMessage = null;
+      })
+      .addCase(getPosts.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.errorMessage = payload;
+      })
+      .addCase(getPosts.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.successMessage = payload.message;
+        state.posts = payload.posts;
       });
   },
 });

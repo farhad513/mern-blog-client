@@ -183,7 +183,23 @@ a{
     flex-direction: column;   
      height: 400px;
     align-items: center;
-    /* background-image: url(); */
     justify-content: center;
-   
+   background-image: url(./images/blog.jpg);
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+   color: white;
+   opacity: 1.0;
+  }
+
+  .banne_design h2{
+    font-size: 55px;
+  }
+
+  .banne_design h3{
+    font-size: 30px;
+  }
+
+  .banne_design p{
+    padding: 0px 30px ;
   }

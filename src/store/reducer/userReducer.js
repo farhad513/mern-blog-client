@@ -83,7 +83,7 @@ const userReducer = createSlice({
       })
       .addCase(getAllUser.rejected, (state, { payload }) => {
         state.loading = false;
-        state.errorMessage = payload.error;
+        state.errorMessage = payload;
       })
       .addCase(getAllUser.fulfilled, (state, { payload }) => {
         state.loading = false;
