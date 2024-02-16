@@ -1,6 +1,6 @@
 const local = "http://localhost:8080";
 
-const production = "https://mern-blog-ci8y.onrender.com/";
+const production = "https://mern-blog-ci8y.onrender.com";
 
 let base_url = "";
 let mode = "production";
