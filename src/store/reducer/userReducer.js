@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../api/api";
+import { base_url } from "../../../utils/config";
 
 export const getAllUser = createAsyncThunk(
   "user/getAllUser",
@@ -11,7 +12,7 @@ export const getAllUser = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.get(`/user/get-all`, config);
+      const { data } = await api.get(`${base_url}/api/user/get-all`, config);
       return fulfillWithValue(data);
     } catch (error) {
       console.log(error);
@@ -30,7 +31,7 @@ export const get_user = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.get(`/user/${userId}`, config);
+      const { data } = await api.get(`${base_url}/api/user/${userId}`, config);
       return fulfillWithValue(data);
     } catch (error) {
       console.log(error);
@@ -49,7 +50,10 @@ export const deleteUser = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.delete(`/user/delete/${userId}`, config);
+      const { data } = await api.delete(
+        `${base_url}/api/user/delete/${userId}`,
+        config
+      );
       console.log(data);
       return fulfillWithValue(data);
     } catch (error) {

@@ -1,9 +1,9 @@
 import axios from "axios";
 const local = "http://localhost:8080/api/v1";
-const production = "";
+const production = "https://mern-blog-ci8y.onrender.com/";
 
 let api_url = "";
-let mode = "dev";
+let mode = "production";
 
 if (mode === "production") {
   api_url = production;
@@ -11,7 +11,7 @@ if (mode === "production") {
   api_url = local;
 }
 const api = axios.create({
-  baseURL: "http://localhost:8080/api/v1",
+  baseURL: `${api_url}/api`,
 });
 
 export default api;

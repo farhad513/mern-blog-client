@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../api/api";
+import { base_url } from "../../../utils/config";
 export const addPost = createAsyncThunk(
   "auth/addPost",
   async (product, { rejectWithValue, fulfillWithValue, getState }) => {
@@ -10,7 +11,11 @@ export const addPost = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.post("/post/create", product, config);
+      const { data } = await api.post(
+        `${base_url}/api/post/create`,
+        product,
+        config
+      );
       return fulfillWithValue(data);
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -28,7 +33,9 @@ export const getPost = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.get(`/post/get-post?userId=${userId}`);
+      const { data } = await api.get(
+        `${base_url}/api/post/get-post?userId=${userId}`
+      );
       return fulfillWithValue(data);
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -46,7 +53,10 @@ export const get_post = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.get(`/post/get/post/${slug}`, config);
+      const { data } = await api.get(
+        `${base_url}/api/post/get/post/${slug}`,
+        config
+      );
       return fulfillWithValue(data);
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -63,7 +73,10 @@ export const recentPost = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.get(`/post/get-post?limit=3`, config);
+      const { data } = await api.get(
+        `${base_url}/api/post/get-post?limit=3`,
+        config
+      );
       return fulfillWithValue(data);
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -81,7 +94,10 @@ export const getSinglePost = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.get(`/post/get/${postId}`, config);
+      const { data } = await api.get(
+        `${base_url}/api/post/get/${postId}`,
+        config
+      );
       return fulfillWithValue(data);
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -99,7 +115,7 @@ export const getPosts = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.get(`/post/getposts`, config);
+      const { data } = await api.get(`${base_url}/api/post/getposts`, config);
       return fulfillWithValue(data);
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -122,7 +138,7 @@ export const update_post = createAsyncThunk(
     };
     try {
       const { data } = await api.put(
-        `/update-post/${postId}/${userId}`,
+        `${base_url}/api/update-post/${postId}/${userId}`,
         state,
         config
       );
@@ -148,7 +164,7 @@ export const delete_post = createAsyncThunk(
     };
     try {
       const { data } = await api.delete(
-        `/post/delete/${postId}/${userId}`,
+        `${base_url}/api/post/delete/${postId}/${userId}`,
         config
       );
       return fulfillWithValue(data);

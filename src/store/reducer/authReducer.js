@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import api from "../../api/api";
 // import jwtDecode from "jwt-decode";
 import jwt from "jwt-decode";
+import { base_url } from "../../../utils/config";
 export const register_user = createAsyncThunk(
   "auth/register_user",
   async (info, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.post("/auth/register", info, {
+      const { data } = await api.post(`${base_url}/api/auth/register`, info, {
         withCredentials: true,
       });
 
@@ -22,7 +22,7 @@ export const login_user = createAsyncThunk(
   "auth/login_user",
   async (info, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.post("/auth/login", info);
+      const { data } = await api.post(`${base_url}/api/auth/login`, info);
       localStorage.setItem("userToken", data.token);
       return fulfillWithValue(data);
     } catch (error) {
@@ -41,7 +41,11 @@ export const update_user = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.put(`/user/update/${info.id}`, info, config);
+      const { data } = await api.put(
+        `${base_url}/api/user/update/${info.id}`,
+        info,
+        config
+      );
       console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
@@ -60,7 +64,10 @@ export const delete_account = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.delete(`/user/delete/${id}`, config);
+      const { data } = await api.delete(
+        `${base_url}/api/user/delete/${id}`,
+        config
+      );
       localStorage.removeItem("userToken");
       return fulfillWithValue(data);
     } catch (error) {
@@ -86,7 +93,11 @@ export const user_Image_update = createAsyncThunk(
       formData.append("oldImage", oldImage);
       formData.append("newImage", newImage);
       formData.append("userId", userId);
-      const { data } = await api.post("/auth/login", formData, config);
+      const { data } = await api.post(
+        `${base_url}/api/auth/login`,
+        formData,
+        config
+      );
       console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
