@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import api from "../../api/api";
-import { base_url } from "../../../utils/config";
+import { base_url } from "../../utils/config";
+import axios from "axios";
 export const addPost = createAsyncThunk(
   "auth/addPost",
   async (product, { rejectWithValue, fulfillWithValue, getState }) => {
@@ -11,7 +11,7 @@ export const addPost = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.post(
+      const { data } = await axios.post(
         `${base_url}/api/post/create`,
         product,
         config
@@ -33,7 +33,7 @@ export const getPost = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.get(
+      const { data } = await axios.get(
         `${base_url}/api/post/get-post?userId=${userId}`
       );
       return fulfillWithValue(data);
@@ -53,7 +53,7 @@ export const get_post = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.get(
+      const { data } = await axios.get(
         `${base_url}/api/post/get/post/${slug}`,
         config
       );
@@ -73,7 +73,7 @@ export const recentPost = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.get(
+      const { data } = await axios.get(
         `${base_url}/api/post/get-post?limit=3`,
         config
       );
@@ -94,7 +94,7 @@ export const getSinglePost = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.get(
+      const { data } = await axios.get(
         `${base_url}/api/post/get/${postId}`,
         config
       );
@@ -115,7 +115,7 @@ export const getPosts = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.get(`${base_url}/api/post/getposts`, config);
+      const { data } = await axios.get(`${base_url}/api/post/getposts`, config);
       return fulfillWithValue(data);
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -137,7 +137,7 @@ export const update_post = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.put(
+      const { data } = await axios.put(
         `${base_url}/api/update-post/${postId}/${userId}`,
         state,
         config
@@ -163,7 +163,7 @@ export const delete_post = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.delete(
+      const { data } = await axios.delete(
         `${base_url}/api/post/delete/${postId}/${userId}`,
         config
       );

@@ -1,18 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // import jwtDecode from "jwt-decode";
 import jwt from "jwt-decode";
-import { base_url } from "../../../utils/config";
+import axios from "axios";
+import { base_url } from "../../utils/config";
 export const register_user = createAsyncThunk(
   "auth/register_user",
   async (info, { rejectWithValue, fulfillWithValue }) => {
+    console.log(info);
     try {
-      const { data } = await api.post(`${base_url}/api/auth/register`, info, {
+      const { data } = await axios.post(`${base_url}/api/auth/register`, info, {
         withCredentials: true,
       });
-
+      console.log(data);
       localStorage.setItem("userToken", data.token);
       return fulfillWithValue(data);
     } catch (error) {
+      console.log(error);
       return rejectWithValue(error.response.data);
     }
   }
@@ -22,7 +25,7 @@ export const login_user = createAsyncThunk(
   "auth/login_user",
   async (info, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.post(`${base_url}/api/auth/login`, info);
+      const { data } = await axios.post(`${base_url}/api/auth/login`, info);
       localStorage.setItem("userToken", data.token);
       return fulfillWithValue(data);
     } catch (error) {
@@ -41,7 +44,7 @@ export const update_user = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.put(
+      const { data } = await axios.put(
         `${base_url}/api/user/update/${info.id}`,
         info,
         config
@@ -64,7 +67,7 @@ export const delete_account = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.delete(
+      const { data } = await axios.delete(
         `${base_url}/api/user/delete/${id}`,
         config
       );
@@ -93,7 +96,7 @@ export const user_Image_update = createAsyncThunk(
       formData.append("oldImage", oldImage);
       formData.append("newImage", newImage);
       formData.append("userId", userId);
-      const { data } = await api.post(
+      const { data } = await axios.post(
         `${base_url}/api/auth/login`,
         formData,
         config
@@ -154,7 +157,7 @@ const authReducer = createSlice({
       })
       .addCase(register_user.rejected, (state, { payload }) => {
         state.loading = false;
-        state.errorMessage = payload.error;
+        state.errorMessage = payload;
       })
       .addCase(login_user.pending, (state) => {
         state.loading = true;

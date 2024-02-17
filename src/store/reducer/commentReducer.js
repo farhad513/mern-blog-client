@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../api/api";
-import { base_url } from "../../../utils/config";
-
+import { base_url } from "../../utils/config";
+import axios from "axios";
 export const create_comment = createAsyncThunk(
   "auth/create_comment",
   async (info, { rejectWithValue, fulfillWithValue, getState }) => {
@@ -12,7 +12,7 @@ export const create_comment = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.post(
+      const { data } = await axios.post(
         `${base_url}/api/comment/create`,
         info,
         config
@@ -34,7 +34,7 @@ export const get_Comment = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.get(`${base_url}/api/comment/get/${postId}`);
+      const { data } = await axios.get(`${base_url}/api/comment/get/${postId}`);
       return fulfillWithValue(data);
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -52,7 +52,7 @@ export const add_like_Comment = createAsyncThunk(
       },
     };
     try {
-      const { data } = await api.put(
+      const { data } = await axios.put(
         `${base_url}/api/comment/likecomment/${commentId}`,
         config
       );
