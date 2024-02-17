@@ -32,11 +32,9 @@ const CreatePost = () => {
   const { successMessage, errorMessage, post } = useSelector(
     (state) => state.post
   );
-
   useEffect(() => {
     if (successMessage) {
       toast.success(successMessage);
-      // navigate(`/post/${post.slug}`);
       navigate("/dashboard/?tab=posts");
       dispatch(messageClear());
     }
@@ -70,12 +68,11 @@ const CreatePost = () => {
                 id=""
               >
                 <option value="">Select Category</option>
-                <option value="nodejs">Node js</option>
-                <option value="react">React </option>
-                <option value="javascript">Javacript</option>
-                <option value="express">Express </option>
-                <option value="mongodb">Mongodb</option>
-                <option value="Redux">Redux </option>
+                <option value="Google Analytics">Google Analytics</option>
+                <option value="SEO">SEO </option>
+                <option value="Content">Content</option>
+                <option value="website">Website </option>
+                <option value="Product Developemnt">Product Development</option>
               </select>
             </div>
           </div>

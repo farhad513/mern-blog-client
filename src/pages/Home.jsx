@@ -33,12 +33,19 @@ const Home = () => {
           <FaArrowRight />
         </Link>
       </div>
-      <div className="d-flex justify-content-center align-items-center flex-column mb-4">
-        <h2 className=" mt-4">Recent Post</h2>
-        <div className="d-flex flex-wrap gap-2">
-          {posts.map((post, i) => {
-            return <PostCard key={i} post={post} />;
-          })}
+      <div className="text-center mb-4">
+        <h2 className="my-4">Recent Post</h2>
+        <div className=" gap-2">
+          <div className="container">
+            <div className="row d-flex">
+              {posts.map((post, i) => {
+                return <PostCard key={i} post={post} />;
+              })}
+              {/* <div className="col-xs-12 col-sm-4">
+               
+              </div> */}
+            </div>
+          </div>
         </div>
       </div>
     </div>
